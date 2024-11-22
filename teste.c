@@ -5,18 +5,18 @@
 int main(){
 
     char armario = 0;
-    int opcao = 0, lugar;
+    int opcao, lugar;
 
     srand(time(NULL));
     
-    do { 
-        puts("\nMENU DE OPÇÕES:\n");
-        puts("1.Ocupar Armário");
-        puts("2.Liberar Armário");
-        puts("3.Finalizar\n");
-        printf("Digite sua opção: ");
-        scanf("%d", &opcao);
+    puts("\nMENU DE OPÇÕES:\n");
+    puts("1.Ocupar Armário");
+    puts("2.Liberar Armário");
+    puts("3.Finalizar\n");
+    printf("Digite sua opção: ");
+    scanf("%d", &opcao);
 
+    while(opcao != 3){ 
         switch (opcao){
             case 1:
                 {
@@ -46,29 +46,37 @@ int main(){
                     puts("Armário inválido!\n");
 
                 }else if(!(armario & (1<<lugar))){
-                    printf("O armário %d já estava livre!\n", lugar);
+                    printf("O armário %d já está desocupado!\n", lugar);
 
                 }else{
                     armario = armario & ~(1<<lugar);
-                    printf("O armário %d está livre agora!\n", lugar);
-
+                    printf("O armário %d ficou desocupado!\n", lugar);
                 }
                 break;
-            case 3:
-                puts("\nPrograma Finalizado!\n");
-                break;
             default:
-                puts("Opção Inválida!\n");
+                puts("\nOpção Inválida!\n");
+                break;
         }
-        puts("\nARMÁRIOS\n");
-        for (int i=7; i>=0; i--){
-            if(armario & (1 << i)){
-                printf("Armário %d: Ocupado\n", i);
+        if(opcao==1 || opcao==2){
+            puts("\nARMÁRIOS\n");
+            for (int i=7; i>=0; i--){
+                if(armario & (1 << i)){
+                    printf("Armário %d: Ocupado\n", i);
+                }
+                else{
+                    printf("Armário %d: Desocupado\n", i);
+                }
             }
-            else{
-                printf("Armário %d: Desocupado\n", i);
-            }
-        } 
-    }while(opcao !=3);
+        }
+        puts("\nMENU DE OPÇÕES:\n");
+        puts("1.Ocupar Armário");
+        puts("2.Liberar Armário");
+        puts("3.Finalizar\n");
+        printf("Digite sua opção: ");
+        scanf("%d", &opcao);
+ 
+    }
+
+    puts("Programa Finalizado!\n");
     return 0;
 }
